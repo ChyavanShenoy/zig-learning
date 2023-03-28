@@ -9,5 +9,10 @@ pub fn main() !void {
 
     var name = try stdin.readUntilDelimiterAlloc(allocator, '\n', 100);
 
+    if (name.len < 1) {
+        name = try allocator.alloc(u8, 5);
+        std.mem.copy(u8, name, "Guest");
+    }
+
     try stdout.print("Hello, {s}! Nice to meet you!", .{name});
 }
